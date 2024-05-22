@@ -1,0 +1,84 @@
+{% extends 'murojaat_base.html' %}
+
+{% load static %}
+
+{% block about_active %} active {% endblock %}
+
+{% block content %}
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'img/muxtarov.jpg' %}" alt="">
+                </div>
+                <div class="col-lg-7">
+                    <div class="text-left mb-4">
+                        <h2>Muxtarov Farrux Muhammadovich</h2>
+                    </div>
+                    <p>Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti Farg’ona filiali direktori</p>
+                    <hr>
+                    <h4>Qabul vaqti: Chorshanba – Juma, 15:00 – 17:00</h4>
+                    <div style="display: flex;">
+                    <i class="fa fa-envelope-open"> </i>&nbsp;<h6> fmm1980@rambler.ru</h6>
+                    </div>
+                    <div style="display: flex;">
+                    <i class="fa fa-phone"> </i>&nbsp;<h6>(373) 226-82-09</h6>
+                    </div>
+                    <div style="display: flex;">
+                    <i class="fa fa-location-arrow"> </i>&nbsp;<h6>Farg'ona shahri, Mustaqillik ko'chasi, 185-uy</h6>
+                    </div>
+<!--                    <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Batafsil</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Registration Start -->
+    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <div class="mb-4">
+                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Diqqat</h5>
+                        <h1 class="text-white">Yangiliklardan boxabar bo'ling</h1>
+                    </div>
+                    <p class="text-white">Bizning yangiliklarga a'zo bo'lsangiz quyidagilarga ega bo'lasiz</p>
+                    <ul class="list-inline text-white m-0">
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>O'z vaqtida yangiliklardan xabardor bo'lish</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>O'z takliflaringizni berish</li>
+                    </ul>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-light text-center p-4">
+                            <h1 class="m-0">A'zo bo'ling</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-primary p-5">
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Ismingiz" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Familiyangiz" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control border-0 p-4" placeholder="Email" required="required" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">Yuborish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Registration End -->
+
+{% endblock %}

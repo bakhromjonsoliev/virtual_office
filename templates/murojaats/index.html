@@ -1,0 +1,123 @@
+{% extends 'murojaat_base.html' %}
+
+{% load static %}
+
+{% block asosiy_active %} active {% endblock %}
+
+{% block content %}
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 pb-5 mb-5">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#header-carousel" data-slide-to="1"></li>
+                <li data-target="#header-carousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="min-height: 300px;">
+                    <img class="position-relative w-100" src="{% static 'img/carousel-1.png' %}" style="min-height: 300px; object-fit: cover;">
+                    <div class="carousel-caption d-flex align-items-center justify-content-center">
+                        <div class="p-5" style="width: 100%; max-width: 900px;">
+                            <!-- <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
+                            <h1 class="display-3 text-white mb-md-4">Best Education From Your Home</h1> -->
+                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Batafsil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="min-height: 300px;">
+                    <img class="position-relative w-100" src="{% static 'img/carousel-2.png' %}" style="min-height: 300px; object-fit: cover;">
+                    <div class="carousel-caption d-flex align-items-center justify-content-center">
+                        <div class="p-5" style="width: 100%; max-width: 900px;">
+                            <!-- <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
+                            <h1 class="display-3 text-white mb-md-4">Best Online Learning Platform</h1> -->
+                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Batafsil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="min-height: 300px;">
+                    <img class="position-relative w-100" src="{% static 'img/carousel-1.png' %}" style="min-height: 300px; object-fit: cover;">
+                    <div class="carousel-caption d-flex align-items-center justify-content-center">
+                        <div class="p-5" style="width: 100%; max-width: 900px;">
+                            <!-- <h5 class="text-white text-uppercase mb-md-3">Best Online Courses</h5>
+                            <h1 class="display-3 text-white mb-md-4">New Way To Learn From Home</h1> -->
+                            <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Batafsil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'img/about.png' %}" alt="">
+                </div>
+                <div class="col-lg-7">
+                    <div class="text-left mb-4">
+                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">So'nggi yangilik</h5>
+                        <h2>TATU Farg‘ona filiali va Vengriya Respublikasining “ARCHENERG” kompaniyasi bilan hamkorlik shartnomasi imzolandi</h2>
+                    </div>
+                    <p>Muhammad al-Xorazmiy nomidagi TATU Farg‘ona filialiga Vengriya Respublikasining “ARChENERG” kompaniyasi a’zosi, maslahatchi Sh.Lakatosh va xalqaro biznes maslahatchi I.Szok tashrif buyurdi.
+
+                        Tashrif mobaynida xalqaro aloqalar va talabalar almashinuvi, professor-o’qituvchilarni ilmiy stajirovkalarga yuborish masalalarida olib borilayotgan ishlar doirasida suhbatlashildi. Shuningdek, suhbat davomida “ARChENERG” klasteriga a’zo bo’lish, klaster tarkibidagi reytingi yuqori universitetlar bilan ilmiy stajirovkalar, talabalar almashinuvini yo’lga qo’yish masalalari muhokama qilindi hamda o‘zaro hamkorlik shartnomasi imzolandi.</p>
+                    <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Batafsil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Registration Start -->
+    <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <div class="mb-4">
+                        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Diqqat</h5>
+                        <h1 class="text-white">Yangiliklardan boxabar bo'ling</h1>
+                    </div>
+                    <p class="text-white">Bizning yangiliklarga a'zo bo'lsangiz quyidagilarga ega bo'lasiz</p>
+                    <ul class="list-inline text-white m-0">
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>O'z vaqtida yangiliklardan xabardor bo'lish</li>
+                        <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>O'z takliflaringizni berish</li>
+                    </ul>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-light text-center p-4">
+                            <h1 class="m-0">A'zo bo'ling</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-primary p-5">
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Ismingiz" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control border-0 p-4" placeholder="Familiyangiz" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control border-0 p-4" placeholder="Email" required="required" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-dark btn-block border-0 py-3" type="submit">Yuborish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Registration End -->
+
+
+{% endblock %}
+
+
+
