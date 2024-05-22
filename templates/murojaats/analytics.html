@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Letter Analytics</h2>
+<p>Total letters: {{ murojaat_count }}</p>
+<ul>
+    {% for status in status_count %}
+        <li>{{ status.status }}: {{ status.total }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

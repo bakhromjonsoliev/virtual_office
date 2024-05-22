@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Letters</h2>
+<ul id="murojaats-list">
+    {% for murojaat in murojaats %}
+        <li id="murojaat-{{ murojaat.id }}">
+            <strong>{{ murojaat.subject }}</strong> - <span class="status">{{ murojaat.get_status_display }}</span>{% if murojaat.is_read %} (Read){% endif %}
+            <p>{{ murojaat.message }}</p>
+            {% if murojaat.answer %}
+                <p><strong>Answer:</strong> {{ murojaat.answer }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+<button id="refresh-status" onclick="refreshStatus()">Refresh Status</button>
+
+<script>
+    function refreshStatus() {
+        fetch('/api/murojaats/')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(letter => {
+                    let murojaatElement = document.getElementById(`murojaat-${murojaat.id}`);
+                    if (murojaatElement) {
+                        let statusElement = murojaatElement.querySelector('.status');
+                        statusElement.textContent = murojaat.status.charAt(0).toUpperCase() + murojaat.status.slice(1);
+                        if (murojaat.is_read) {
+                            murojaatElement.innerHTML += ' (Read)';
+                        }
+                        if (murojaat.answer) {
+                            let answerElement = murojaatElement.querySelector('.answer');
+                            if (!answerElement) {
+                                answerElement = document.createElement('p');
+                                answerElement.className = 'answer';
+                                murojaatElement.appendChild(answerElement);
+                            }
+                            answerElement.innerHTML = `<strong>Answer:</strong> ${murojaat.answer}`;
+                        }
+                    }
+                });
+            });
+    }
+</script>
+{% endblock %}
+
+
