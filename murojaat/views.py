@@ -45,3 +45,15 @@ class MurojaatViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Murojaat.objects.filter(user=self.request.user)
+
+def murojaat_index(request):
+    return render(request,'murojaats/index.html')
+
+def murojaat_about(request):
+    return render(request,'murojaats/about.html')
+
+def murojaat_contact(request):
+    return render(request,'murojaats/contact.html')
+
+def murojaat_statistika(request):
+    return render(request,'murojaats/course.html')
