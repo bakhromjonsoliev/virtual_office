@@ -5,7 +5,33 @@
 {% block statistika_active %} active {% endblock %}
 
 {% block content %}
+<style>
+  .chart-container {
+    height: 400px;
+  }
 
+  .chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .mychart {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin: 3% 10%;
+
+  }
+  .chart-container {
+    flex: 1;
+    max-width: 40%;
+    position: relative;
+  }
+  .chart-container p {
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  }
+</style>
 
     <!-- Header Start -->
     <div class="container-fluid page-header" style="margin-bottom: 90px;">
@@ -24,7 +50,127 @@
 
 
     <!-- Statistika Start -->
-    
+    <p>Jami xatlar: {{ murojaat_count }}</p>
+<ul>
+    {% for status in status_count %}
+        <li>{{ status.status }}: {{ status.total }}</li>
+    {% endfor %}
+</ul>
+
+<div class="mychart">
+    <div class="chart-container">
+        <p>Murojaat turi bo'yicha</p>
+        <canvas id="myChart1"></canvas>
+    </div>
+    <div class="chart-container">
+        <p>Viloyatlar bo'yicha</p>
+        <canvas id="myChart2"></canvas>
+    </div>
+</div>
+<div class="mychart">
+    <div class="chart-container">
+        <p>Murojaat turi bo'yicha</p>
+        <canvas id="myChart3"></canvas>
+    </div>
+    <div class="chart-container">
+        <p>Viloyatlar bo'yicha</p>
+        <canvas id="myChart4"></canvas>
+    </div>
+</div>
+<script type="text/javascript">
+  var statusData = {{ status_count|safe }};
+  console.log(statusData); // Debugging: print data to console
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx1 = document.getElementById('myChart1');
+  const ctx2 = document.getElementById('myChart2');
+  const ctx3 = document.getElementById('myChart3');
+  const ctx4 = document.getElementById('myChart4');
+
+  // Debugging: check if statusData is correctly logged
+  console.log('Status Data:', statusData);
+
+  const labels = statusData.map(item => item.status);
+  const data = statusData.map(item => item.total);
+//['Murojaat', 'Taklif', 'Shikoyat', 'Talabnoma', 'Bosh_ish_orin', 'Rahbariyat_qabuli', 'Sayt_mamuriyatiga']
+
+// Debugging: check if labels and data are correctly mapped
+  console.log('Labels:', labels);
+  console.log('Data:', data);
+
+  new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: '# of Votes',
+        data: data,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      maintainAspectRatio: false
+    }
+  });
+   new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      maintainAspectRatio: false
+    }
+  });
+
+  new Chart(ctx3, {
+    type: 'line',
+    data: {
+      labels: ['Murojaat', 'Taklif', 'Shikoyat', 'Talabnoma', 'Bosh_ish_orin', 'Rahbariyat_qabuli', 'Sayt_mamuriyatiga'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3, 4],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      maintainAspectRatio: false
+    }
+  });
+
+   new Chart(ctx4, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: 'Dataset 4',
+        data: [6, 11, 3, 15, 12, 5],
+        borderWidth: 1,
+        backgroundColor: 'lightgreen',
+        fill: true
+      }]
+    },
+    options: {
+      maintainAspectRatio: false
+    }
+  });
+
+</script>
     <!-- Statistika End -->
 
 {% endblock %}

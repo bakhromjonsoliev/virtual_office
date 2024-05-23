@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 
 class Murojaat(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('accepted', 'Accepted'),
-        ('rejected', 'Rejected'),
+        ('pending', 'Korib chiqilmoqda'),
+        ('accepted', 'Qabol qilindi'),
+        ('rejected', 'Rad etildi'),
+        ('answered', 'Javob berildi'),
     ]
 
     VILOYAT_CHOICES = [
@@ -34,7 +35,6 @@ class Murojaat(models.Model):
         ('sayt_mamuriyatiga', 'Sayt_mamuriyatiga'),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     fish = models.CharField(max_length=255)
     ish_joyi = models.CharField(max_length=255)
     telefon = models.CharField(max_length=255)
@@ -48,7 +48,6 @@ class Murojaat(models.Model):
     murojaat_fayli = models.FileField(blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     is_read = models.BooleanField(default=False)
     answer = models.TextField(blank=True, null=True)
 

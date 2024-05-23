@@ -27,7 +27,8 @@
 
 <!--    murojaat start-->
 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin: 0 15%;">
-	<form action="" enctype="multipart/form-data" id="myform" method="post" accept-charset="utf-8">
+	<form enctype="multipart/form-data" id="myform" method="post" accept-charset="utf-8">
+		{% csrf_token %}
 	<div class="row">
 
 		<div class="col-md-12">
@@ -38,12 +39,14 @@
 				<div class="panel-body">
 					<div class="form-group">
 						<label class="control-label" for="fio">F.I.SH. <span>*</span></label>
-						<input type="text" id="fio" class="form-control" name="fio" value="" placeholder="Familiya, ism, sharifingizni kiriting">
+						<input type="text" id="fio" class="form-control" name="fio" value="{{ form.fish.value|default_if_none:'' }}" placeholder="Familiya, ism, sharifingizni kiriting">
+						{{ form.fish.errors }}
 					</div>
 					<div class="mess-error"> </div>
 					<div class="form-group">
 						<label class="control-label" for="ish_joyi">Ish joyingiz va lavozimingizni kiriting (Talabalar uchun o'quv yurti nomi guruh va yo'nalish nomi')<span>*</span></label>
-						<input type="text" id="ish_joyi" class="form-control" name="ish_joyi" value="" placeholder="Ish joyingiz va lavozimingizni kiriting (Talabalar uchun o'quv yurti nomi guruh va yo'nalish nomi)">
+						<input type="text" id="ish_joyi" class="form-control" name="ish_joyi" value="{{ form.ish_joyi.value|default_if_none:'' }}" placeholder="Ish joyingiz va lavozimingizni kiriting (Talabalar uchun o'quv yurti nomi guruh va yo'nalish nomi)">
+						{{ form.ish_joyi.errors }}
 					</div>
 					<div class="mess-error"></div>
 					<div class="row">
@@ -52,7 +55,8 @@
 								<label class="control-label" for="tel">Telefon raqam <span>*</span></label>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1">+998</span>
-									<input type="tel" id="tel" class="form-control" name="tel" value="" placeholder="XX-XXX-XX-XX" aria-describedby="basic-addon1">
+									<input type="tel" id="tel" class="form-control" name="tel" value="{{ form.telefon.value|default_if_none:'' }}" placeholder="XX-XXX-XX-XX" aria-describedby="basic-addon1">
+									{{ form.telefon.errors }}
 								</div>
 							</div>
 							<div class="mess-error"></div>
@@ -60,31 +64,20 @@
 						<div class="col col-md-6">
 							<div class="form-group">
 								<label class="control-label" for="pochta">Elektron pochta <span>*</span></label>
-								<input type="email" id="pochta" class="form-control" name="pochta" value="" placeholder="example@example.com">
+								<input type="email" id="pochta" class="form-control" name="pochta" value="{{ form.email.value|default_if_none:'' }}" placeholder="example@example.com">
+								{{ form.email.errors }}
 							</div>
 							<div class="mess-error"></div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="viloyat">Xudud <span>*</span></label>
-						<select id="viloyat" class="form-control" name="viloyat">
-							<option>--Viloyat tanlang--</option>
-														<option value="1">Andijon viloyati</option>
-														<option value="2">Buxoro viloyati</option>
-														<option value="3">Jizzax viloyati</option>
-														<option value="4">Qashqadaryo viloyati</option>
-														<option value="5">Navoiy viloyati</option>
-														<option value="6">Namangan viloyati</option>
-														<option value="7">Samarqand viloyati</option>
-														<option value="8">Surxondaryo viloyati</option>
-														<option value="9">Sirdaryo viloyati</option>
-														<option value="10">Toshkent viloyati</option>
-														<option value="11">Farg'ona viloyati</option>
-														<option value="12">Xorazm viloyati</option>
-														<option value="13">Qoraqalpog'iston Respublikasi</option>
-														<option value="14">Toshkent shaxri</option>
-
+						<label class="control-label" for="hudud">Hudud <span>*</span></label>
+						<select id="hudud" class="form-control" name="hudud">
+							{% for value, name in form.hudud.field.choices %}
+                    <option value="{{ value }}" {% if form.hudud.value == value %}selected{% endif %}>{{ name }}</option>
+                {% endfor %}
 						</select>
+						{{ form.hudud.errors }}
 					</div>
 					<div class="mess-error"></div>
 					<div class="form-group" style="display: none;" id="shahar">
@@ -96,12 +89,14 @@
 					<div class="mess-error"></div>
 					<div class="form-group">
 						<label class="control-label" for="manzil">Manzil <span>*</span></label>
-						<input type="text" id="manzil" class="form-control" name="manzil" value="" placeholder=" QFY, MFY, ko'cha va uy raqami">
+						<input type="text" id="manzil" class="form-control" name="manzil" value="{{ form.manzil.value|default_if_none:'' }}" placeholder=" QFY, MFY, ko'cha va uy raqami">
+						{{ form.manzil.errors }}
 					</div>
 					<div class="mess-error"> </div>
 					<div class="form-group">
 						<label class="control-label" for="pasport">Pasport ma'lumotlari <span>*</span></label>
-						<input type="text" id="pasport" class="form-control" name="pasport" value="" placeholder="Passport seriyasi, raqami, qachon va kim tomonidan berilgan">
+						<input type="text" id="pasport" class="form-control" name="pasport" value="{{ form.passport.value|default_if_none:'' }}" placeholder="Passport seriyasi, raqami, qachon va kim tomonidan berilgan">
+						{{ form.passport.errors }}
 					</div>
 					<div class="mess-error"></div>
 				</div>
@@ -116,82 +111,40 @@
 					<div class="form-group">
 						<label class="control-label" for="m_turi">Murojaat turi <span>*</span></label>
 						<select name="m_turi" class="form-control" id="m_turi">
-							<option>--Murojaat turini tanlang--</option>
-														<option value="1">Murojaat</option>
-														<option value="2">Taklif</option>
-														<option value="3">Shikoyat</option>
-														<option value="4">Talabnoma</option>
-														<option value="6">Bo'sh ish o'rin talabnomasi</option>
-														<option value="7">Rahbariyatning shaxsiy qabuliga yozuv</option>
-														<option value="8">Sayt ma'muriyatiga murojaat</option>
-													</select>
+							{% for value, name in form.murojaat_turi.field.choices %}
+							<option value="{{ value }}" {% if form.murojaat_turi.value == value %}selected{% endif %}>{{ name }}</option>
+						{% endfor %}
+						</select>
+						{{ form.murojaat_turi.errors }}
 					</div>
 					<div class="mess-error"></div>
 					<div class="form-group">
 						<label class="control-label" for="m_mavzu">Murojaat mavzusi <span>*</span></label>
-						<input type="text" id="m_mavzu" class="form-control" name="m_mavzu" value="" placeholder="Murojaat mavzusini kiriting">
+						<input type="text" id="m_mavzu" class="form-control" name="m_mavzu" value="{{ form.murojaat_mavzusi.value|default_if_none:'' }}" placeholder="Murojaat mavzusini kiriting">
+						{{ form.murojaat_mavzusi.errors }}
 					</div>
 					<div class="mess-error"></div>
 					<div class="form-group">
 						<p class="text-mess">
-							Murojaatingiz tezkor ravishda xal etilishini istasangiz, xar bir masala bo'yicha alohida murojaat yo'llashingizni xamda mazkur murojaatni tushinarli, oddiy va ravon tilda bayon etishingizni so'raymiz!
+							Murojaatingiz tezkor ravishda xal etilishini istasangiz, xar bir masala bo'yicha alohida murojaat yo'llashingizni xamda mazkur murojaatni tushunarli, oddiy va ravon tilda bayon etishingizni so'raymiz!
 						</p>
 					</div>
 					<div class="form-group  ">
 						<label class="control-label" for="m_matni">Murojaat matni <span>*</span></label>
-						<textarea id="m_matni" class="form-control" name="m_matni" value="" style="min-height:185px" placeholder="Murojaat matnini kiriting"></textarea>
+						<textarea id="m_matni" class="form-control" name="m_matni" value="{{ form.murojaat_matni.value|default_if_none:'' }}" style="min-height:185px" placeholder="Murojaat matnini kiriting"></textarea>
+						{{ form.murojaat_matni.errors }}
 					</div>
 					<div class="mess-error"></div>
 					<div class="form-group">
 						<label class="control-label" for="fayl">Fayl biriktirish (yuborish mumkin bo'lgan fayl kengaytmalar doc,docx,pdf,jpg,png )	</label>
 						<input type="file" id="fayl" class="form-control" name="fayl" placeholder="Yuklash...">
+						{{ form.murojaat_fayli.errors }}
 					</div>
 					<div class="error"> </div>
 					<div class="row">
 						<div class="form-group  ">
-							<div>
-								<div class="col-md-2 col-xs-5 ">
-									<img class="img-captcha" src="https://vq.tatuff.uz/site/captcha" class="img-rounded">
-								</div>
-								<div class="col-md-1 col-xs-7">
-									<div  class="btn btn-default reload-captcha"><i class="glyphicon glyphicon-refresh"></i></div>
-								</div>
-								<div class="col-md-5 col-xs-12">
-									<input type="text" class="form-control" name="captcha" id="captcha" placeholder="Rasmdagi ko'dni kiriting"/>
-									<div class="mess-error"> </div>
-								</div>
-								<div class=" col-md-4 col-xs-12">
-									<button type="button" class="btn btn-primary btn-block btn_s" data-toggle="modal" data-target="#myModal">JO'NATISH</button>
-									<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-										<div class="modal-dialog " role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-													<h4 class="modal-title " id="myModalLabel">Eslatma!</h4>
-												</div>
-												<div class="modal-body">
-													<h5 style="font-weight: bold">Hurmatli foydalanuvchi!</h5>
-													<p>&emsp;Sizga Muhammad Al-Xorazmiy nomidagiXToshkent Axborot Texnologiyalari Universiteti Farg`ona filiali direktoriga bevosita elektron tarzda murojaatlarni yuborish imkoniyati taqdim etilmoqda. Shu bilan birga, Sizning yuborayotgan murojaatingiz rasmiy maqomga ega ekanligini ham eslatib o`tmoqchimiz.<br>
-														&emsp;Shu sababli, Sizdan quyidagilarni unutmasligingizni so`raymiz:<br>
-														&emsp;1. Jismoniy shaxs sifatida murojaat yo`llasangiz familiyangiz (ismingiz, otangizning ismi), yashash joyingiz to`g`risidagi ma`lumotlar ko`rsatilgan va murojaatingiz mohiyati bayon etilgan bo`lishi shart. Yuridik shaxs sifatida murojaat yo`llasangiz yuridik shaxsning to`liq nomi, uning joylashgan joyi (pochta manzili) to`g`risidagi ma`lumotlar ko`rsatilgan va murojaatning mohiyati bayon etilishi talab etiladi.<br>
-														&emsp;2. Alohida e`tibor bering! Tuhmat, haqorat so`zlar ishlatilgan va yolg`on xabar beruvchi murojaatlarni taqdim etish mumkin emas.<br>
-														&emsp;3. Shuningdek, quyidagi holatlarda murojaatlaringiz rad etilishi mumkinligini eslatib o`tmoqchimiz: <br>
-														&emsp;&emsp;&bull; odobsizlik mazmunidagi murojaatlar (uyatsiz yoxud haqoratli iboralar, tahdidlar, mantiq va ma`nosi bo`lmagan takliflar va shunga o`xshash murojaatlar);<br>
-														&emsp;&emsp;&bull; murojaat matnida tushunarsiz qisqartirishlar yoki reklama materiallari mavjud bo`lgan, tarkibida aniq arizalar, shikoyatlar yoki takliflar bo`lmagan murojaatlar <br>
-														&emsp;4. Shuningdek, foydalanuvchining bir necha bor bitta masala bo`yicha javob berilgan murojaatini qayta yuborilganda agar unda yangi vajlar yoki holatlar keltirilmagan bo`lsa, ko`rib chiqilmaydi. <br>
-														&emsp;Mazkur shartlarning barchasi O`zbekiston Respublikasining amaldagi qonunchiligidan kelib chiqqan holda belgilangan.</p><br>
-													<label>
-														<input type="checkbox" name="tasdiq" id="tasdiq"/> Tanishdim
-													</label>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal">QAYTISH</button>
-													<button type="submit"  name="s2" class="btn btn-primary" disabled id="s2">JO'NATISH</button>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								<div class="col-md-4 col-xs-12">
+									<button type="submit" class="btn btn-primary btn_s" data-toggle="modal" data-target="#myModal">JO'NATISH</button>
 							</div>
 						</div>
 					</div>
@@ -205,42 +158,42 @@
 
 
     <!-- Contact Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="text-center mb-5">
-                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Aloqa</h5>
-                <h1>Contact For Any Query</h1>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="contact-form bg-secondary rounded p-5">
-                        <div id="success"></div>
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="email" class="form-control border-0 p-4" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <input type="text" class="form-control border-0 p-4" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="control-group">
-                                <textarea class="form-control border-0 py-3 px-4" rows="5" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="text-center">
-                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="container-fluid py-5">-->
+<!--        <div class="container py-5">-->
+<!--            <div class="text-center mb-5">-->
+<!--                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Aloqa</h5>-->
+<!--                <h1>Contact For Any Query</h1>-->
+<!--            </div>-->
+<!--            <div class="row justify-content-center">-->
+<!--                <div class="col-lg-8">-->
+<!--                    <div class="contact-form bg-secondary rounded p-5">-->
+<!--                        <div id="success"></div>-->
+<!--                        <form name="sentMessage" id="contactForm" novalidate="novalidate">-->
+<!--                            <div class="control-group">-->
+<!--                                <input type="text" class="form-control border-0 p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />-->
+<!--                                <p class="help-block text-danger"></p>-->
+<!--                            </div>-->
+<!--                            <div class="control-group">-->
+<!--                                <input type="email" class="form-control border-0 p-4" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />-->
+<!--                                <p class="help-block text-danger"></p>-->
+<!--                            </div>-->
+<!--                            <div class="control-group">-->
+<!--                                <input type="text" class="form-control border-0 p-4" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />-->
+<!--                                <p class="help-block text-danger"></p>-->
+<!--                            </div>-->
+<!--                            <div class="control-group">-->
+<!--                                <textarea class="form-control border-0 py-3 px-4" rows="5" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>-->
+<!--                                <p class="help-block text-danger"></p>-->
+<!--                            </div>-->
+<!--                            <div class="text-center">-->
+<!--                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">Send Message</button>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <!-- Contact End -->
 
 {% endblock %}

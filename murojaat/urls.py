@@ -14,9 +14,9 @@ urlpatterns = [
     path('contact/', views.murojaat_contact, name='murojaat_contact'),
     path('statistika/', views.murojaat_statistika, name='murojaat_statistika'),
 
-    path('submit/', views.submit_murojaat, name='submit_murojaat'),
-    path('status/', views.murojaat_status, name='murojaat_status'),
-    path('analytics/', views.analytics, name='analytics'),
+    # path('submit/', views.submit_murojaat, name='submit_murojaat'),
+    # path('status/', views.murojaat_status, name='murojaat_status'),
+    # path('analytics/', views.analytics, name='analytics'),
     path('api/', include(router.urls)),
 ]
 
