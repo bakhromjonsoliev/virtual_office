@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Murojaat
 
 class MurojaatAdmin(admin.ModelAdmin):
-    list_display = ('subject', 'user', 'status', 'created_at', 'is_read')
+    list_display = ('fish', 'status', 'created_at', 'is_read')
     list_filter = ('status', 'created_at')
     actions = ['mark_as_read']
 

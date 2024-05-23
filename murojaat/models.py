@@ -34,7 +34,7 @@ class Murojaat(models.Model):
         ('sayt_mamuriyatiga', 'Sayt_mamuriyatiga'),
     ]
 
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     fish = models.CharField(max_length=255)
     ish_joyi = models.CharField(max_length=255)
     telefon = models.CharField(max_length=255)
@@ -53,4 +53,4 @@ class Murojaat(models.Model):
     answer = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.subject
+        return f'{self.fish} {self.murojaat_turi} {self.murojaat_mavzusi}'
