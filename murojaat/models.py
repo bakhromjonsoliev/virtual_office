@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+
 
 class Murojaat(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Korib chiqilmoqda'),
-        ('accepted', 'Qabol qilindi'),
+        ('accepted', 'Qabul qilindi'),
         ('rejected', 'Rad etildi'),
         ('answered', 'Javob berildi'),
     ]

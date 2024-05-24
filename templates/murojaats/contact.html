@@ -38,36 +38,35 @@
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
-						<label class="control-label" for="fio">F.I.SH. <span>*</span></label>
-						<input type="text" id="fio" class="form-control" name="fio" value="{{ form.fish.value|default_if_none:'' }}" placeholder="Familiya, ism, sharifingizni kiriting">
+						<label class="control-label" for="fish">F.I.SH. <span>*</span></label>
+						<input type="text" id="fish" class="form-control" name="fish" value="{{ form.fish.value|default_if_none:'' }}" placeholder="Familiya, ism, sharifingizni kiriting">
 						{{ form.fish.errors }}
 					</div>
-					<div class="mess-error"> </div>
 					<div class="form-group">
 						<label class="control-label" for="ish_joyi">Ish joyingiz va lavozimingizni kiriting (Talabalar uchun o'quv yurti nomi guruh va yo'nalish nomi')<span>*</span></label>
 						<input type="text" id="ish_joyi" class="form-control" name="ish_joyi" value="{{ form.ish_joyi.value|default_if_none:'' }}" placeholder="Ish joyingiz va lavozimingizni kiriting (Talabalar uchun o'quv yurti nomi guruh va yo'nalish nomi)">
 						{{ form.ish_joyi.errors }}
 					</div>
-					<div class="mess-error"></div>
+
 					<div class="row">
 						<div class="col col-md-6">
 							<div class="form-group">
-								<label class="control-label" for="tel">Telefon raqam <span>*</span></label>
+								<label class="control-label" for="telefon">Telefon raqam <span>*</span></label>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1">+998</span>
-									<input type="tel" id="tel" class="form-control" name="tel" value="{{ form.telefon.value|default_if_none:'' }}" placeholder="XX-XXX-XX-XX" aria-describedby="basic-addon1">
+									<input type="telefon" id="telefon" class="form-control" name="telefon" value="{{ form.telefon.value|default_if_none:'' }}" placeholder="+XXX-XX-XXX-XX-XX" aria-describedby="basic-addon1">
 									{{ form.telefon.errors }}
 								</div>
 							</div>
-							<div class="mess-error"></div>
+
 						</div>
 						<div class="col col-md-6">
 							<div class="form-group">
-								<label class="control-label" for="pochta">Elektron pochta <span>*</span></label>
-								<input type="email" id="pochta" class="form-control" name="pochta" value="{{ form.email.value|default_if_none:'' }}" placeholder="example@example.com">
+								<label class="control-label" for="email">Elektron pochta <span>*</span></label>
+								<input type="email" id="email" class="form-control" name="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="example@example.com">
 								{{ form.email.errors }}
 							</div>
-							<div class="mess-error"></div>
+
 						</div>
 					</div>
 					<div class="form-group">
@@ -79,26 +78,19 @@
 						</select>
 						{{ form.hudud.errors }}
 					</div>
-					<div class="mess-error"></div>
-					<div class="form-group" style="display: none;" id="shahar">
-						<label class="control-label" for="tuman">Tuman (shaxar) <span>*</span></label>
-						<select id="tuman" class="form-control" name="tuman" >
 
-						</select>
-					</div>
-					<div class="mess-error"></div>
 					<div class="form-group">
 						<label class="control-label" for="manzil">Manzil <span>*</span></label>
 						<input type="text" id="manzil" class="form-control" name="manzil" value="{{ form.manzil.value|default_if_none:'' }}" placeholder=" QFY, MFY, ko'cha va uy raqami">
 						{{ form.manzil.errors }}
 					</div>
-					<div class="mess-error"> </div>
+
 					<div class="form-group">
-						<label class="control-label" for="pasport">Pasport ma'lumotlari <span>*</span></label>
-						<input type="text" id="pasport" class="form-control" name="pasport" value="{{ form.passport.value|default_if_none:'' }}" placeholder="Passport seriyasi, raqami, qachon va kim tomonidan berilgan">
+						<label class="control-label" for="passport">Pasport ma'lumotlari <span>*</span></label>
+						<input type="text" id="passport" class="form-control" name="passport" value="{{ form.passport.value|default_if_none:'' }}" placeholder="Passport seriyasi, raqami, qachon va kim tomonidan berilgan">
 						{{ form.passport.errors }}
 					</div>
-					<div class="mess-error"></div>
+
 				</div>
 			</div>
 		</div>
@@ -109,42 +101,42 @@
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
-						<label class="control-label" for="m_turi">Murojaat turi <span>*</span></label>
-						<select name="m_turi" class="form-control" id="m_turi">
+						<label class="control-label" for="murojaat_turi">Murojaat turi <span>*</span></label>
+						<select name="murojaat_turi" class="form-control" id="murojaat_turi">
 							{% for value, name in form.murojaat_turi.field.choices %}
 							<option value="{{ value }}" {% if form.murojaat_turi.value == value %}selected{% endif %}>{{ name }}</option>
 						{% endfor %}
 						</select>
 						{{ form.murojaat_turi.errors }}
 					</div>
-					<div class="mess-error"></div>
+
 					<div class="form-group">
-						<label class="control-label" for="m_mavzu">Murojaat mavzusi <span>*</span></label>
-						<input type="text" id="m_mavzu" class="form-control" name="m_mavzu" value="{{ form.murojaat_mavzusi.value|default_if_none:'' }}" placeholder="Murojaat mavzusini kiriting">
+						<label class="control-label" for="murojaat_mavzusi">Murojaat mavzusi <span>*</span></label>
+						<input type="text" id="murojaat_mavzusi" class="form-control" name="murojaat_mavzusi" value="{{ form.murojaat_mavzusi.value|default_if_none:'' }}" placeholder="Murojaat mavzusini kiriting">
 						{{ form.murojaat_mavzusi.errors }}
 					</div>
-					<div class="mess-error"></div>
+
 					<div class="form-group">
 						<p class="text-mess">
 							Murojaatingiz tezkor ravishda xal etilishini istasangiz, xar bir masala bo'yicha alohida murojaat yo'llashingizni xamda mazkur murojaatni tushunarli, oddiy va ravon tilda bayon etishingizni so'raymiz!
 						</p>
 					</div>
 					<div class="form-group  ">
-						<label class="control-label" for="m_matni">Murojaat matni <span>*</span></label>
-						<textarea id="m_matni" class="form-control" name="m_matni" value="{{ form.murojaat_matni.value|default_if_none:'' }}" style="min-height:185px" placeholder="Murojaat matnini kiriting"></textarea>
+						<label class="control-label" for="murojaat_matni">Murojaat matni <span>*</span></label>
+						<textarea id="murojaat_matni" class="form-control" name="murojaat_matni" value="{{ form.murojaat_matni.value|default_if_none:'' }}" style="min-height:185px" placeholder="Murojaat matnini kiriting"></textarea>
 						{{ form.murojaat_matni.errors }}
 					</div>
-					<div class="mess-error"></div>
+
 					<div class="form-group">
-						<label class="control-label" for="fayl">Fayl biriktirish (yuborish mumkin bo'lgan fayl kengaytmalar doc,docx,pdf,jpg,png )	</label>
-						<input type="file" id="fayl" class="form-control" name="fayl" placeholder="Yuklash...">
+						<label class="control-label" for="murojaat_fayli">Fayl biriktirish (yuborish mumkin bo'lgan fayl kengaytmalar doc,docx,pdf,jpg,png )	</label>
+						<input type="file" id="murojaat_fayli" class="form-control" name="murojaat_fayli" placeholder="Yuklash...">
 						{{ form.murojaat_fayli.errors }}
 					</div>
-					<div class="error"> </div>
+
 					<div class="row">
-						<div class="form-group  ">
+						<div class="form-group">
 								<div class="col-md-4 col-xs-12">
-									<button type="submit" class="btn btn-primary btn_s" data-toggle="modal" data-target="#myModal">JO'NATISH</button>
+									<button type="submit" class="btn btn-primary btn_s">JO'NATISH</button>
 							</div>
 						</div>
 					</div>
@@ -156,44 +148,5 @@
 </div>
 <!--    murojaat start-->
 
-
-    <!-- Contact Start -->
-<!--    <div class="container-fluid py-5">-->
-<!--        <div class="container py-5">-->
-<!--            <div class="text-center mb-5">-->
-<!--                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Aloqa</h5>-->
-<!--                <h1>Contact For Any Query</h1>-->
-<!--            </div>-->
-<!--            <div class="row justify-content-center">-->
-<!--                <div class="col-lg-8">-->
-<!--                    <div class="contact-form bg-secondary rounded p-5">-->
-<!--                        <div id="success"></div>-->
-<!--                        <form name="sentMessage" id="contactForm" novalidate="novalidate">-->
-<!--                            <div class="control-group">-->
-<!--                                <input type="text" class="form-control border-0 p-4" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />-->
-<!--                                <p class="help-block text-danger"></p>-->
-<!--                            </div>-->
-<!--                            <div class="control-group">-->
-<!--                                <input type="email" class="form-control border-0 p-4" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />-->
-<!--                                <p class="help-block text-danger"></p>-->
-<!--                            </div>-->
-<!--                            <div class="control-group">-->
-<!--                                <input type="text" class="form-control border-0 p-4" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />-->
-<!--                                <p class="help-block text-danger"></p>-->
-<!--                            </div>-->
-<!--                            <div class="control-group">-->
-<!--                                <textarea class="form-control border-0 py-3 px-4" rows="5" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>-->
-<!--                                <p class="help-block text-danger"></p>-->
-<!--                            </div>-->
-<!--                            <div class="text-center">-->
-<!--                                <button class="btn btn-primary py-3 px-5" type="submit" id="sendMessageButton">Send Message</button>-->
-<!--                            </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-    <!-- Contact End -->
 
 {% endblock %}

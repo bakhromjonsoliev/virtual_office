@@ -13,6 +13,8 @@ urlpatterns = [
     path('about/', views.murojaat_about, name='murojaat_about'),
     path('contact/', views.murojaat_contact, name='murojaat_contact'),
     path('statistika/', views.murojaat_statistika, name='murojaat_statistika'),
+    path('statistika/<int:id>/', views.murojaat_statistika, name='murojaat_statistika_id'),
+    path('check_status/', views.check_status, name='check_status'),
 
     # path('submit/', views.submit_murojaat, name='submit_murojaat'),
     # path('status/', views.murojaat_status, name='murojaat_status'),

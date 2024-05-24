@@ -68,7 +68,7 @@
                 <div class="d-inline-flex align-items-center">
                     <i class="fa fa-2x fa-user text-primary mr-3"></i>
                     <div class="text-left">
-                        <a class="font-weight-semi-bold mb-1" href="#">Login</a>
+                        <a class="font-weight-semi-bold mb-1" href="{% url 'admin:index' %}">Login</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                             <a href="{% url 'index' %}" class="nav-item nav-link {% block asosiy_active %} {% endblock %}">Asosiy</a>
                             <a href="{% url 'murojaat_about' %}" class="nav-item nav-link {% block about_active %} {% endblock %}">Biz haqimizda</a>
                             <a href="{% url 'murojaat_statistika' %}" class="nav-item nav-link {% block statistika_active %} {% endblock %}">Statistika</a>
-                            <a href="{% url 'murojaat_contact' %}" class="nav-item nav-link {% block aloqa_active %} {% endblock %}">Aloqa</a>
+                            <a href="{% url 'check_status' %}" class="nav-item nav-link {% block aloqa_active %} {% endblock %}">Status</a>
                         </div>
                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="{% url 'murojaat_contact' %}">Murojaat yuborish</a>
                     </div>

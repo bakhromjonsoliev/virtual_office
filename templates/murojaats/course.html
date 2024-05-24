@@ -31,6 +31,20 @@
   font-weight: bold;
   text-decoration: underline;
   }
+  .murojaatid {
+  background-color: pink;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
+  font-size: 24px;
+  }
+  .statistika
+  {
+  width: 70%;
+  margin: 3% 10%;
+  background-color: #cee8ed;
+  padding: 5px;
+  }
 </style>
 
     <!-- Header Start -->
@@ -48,22 +62,28 @@
     </div>
     <!-- Header End -->
 
+    <!--murojaat id -->
+    {% if murojaat_id %}
+        <p class="murojaatid">Sizning Murojaat ID: {{ murojaat_id }}</p>
+    {% endif %}
+    <!--murojaat id -->
 
     <!-- Statistika Start -->
-    <p>Jami xatlar: {{ murojaat_count }}</p>
-<ul>
-    {% for status in status_count %}
-        <li>{{ status.status }}: {{ status.total }}</li>
-    {% endfor %}
-</ul>
-
+    <div class="statistika">
+        <p>Jami xatlar: {{ murojaat_count }}</p>
+        <ul>
+            {% for status in status_count %}
+                <li>{{ status.status }}: {{ status.total }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 <div class="mychart">
     <div class="chart-container">
         <p>Murojaat turi bo'yicha</p>
         <canvas id="myChart1"></canvas>
     </div>
     <div class="chart-container">
-        <p>Viloyatlar bo'yicha</p>
+        <p>Murojaat holati bo'yicha</p>
         <canvas id="myChart2"></canvas>
     </div>
 </div>
@@ -78,98 +98,104 @@
     </div>
 </div>
 <script type="text/javascript">
-  var statusData = {{ status_count|safe }};
-  console.log(statusData); // Debugging: print data to console
+    var statusData = JSON.parse('{{ status_count_json|escapejs }}');
+    var murojaatTuriData = JSON.parse('{{ murojaat_turi_count_json|escapejs }}');
+    var acceptedLastWeekData = JSON.parse('{{ accepted_last_week_json|escapejs }}');
+    var hududData = JSON.parse('{{ hudud_count_json|escapejs }}');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  const ctx1 = document.getElementById('myChart1');
-  const ctx2 = document.getElementById('myChart2');
-  const ctx3 = document.getElementById('myChart3');
-  const ctx4 = document.getElementById('myChart4');
+document.addEventListener('DOMContentLoaded', function () {
+    const ctx1 = document.getElementById('myChart1').getContext('2d');
+    const ctx2 = document.getElementById('myChart2').getContext('2d');
+    const ctx3 = document.getElementById('myChart3').getContext('2d');
+    const ctx4 = document.getElementById('myChart4').getContext('2d');
 
-  // Debugging: check if statusData is correctly logged
-  console.log('Status Data:', statusData);
+    const labels = statusData.map(item => item.status);
+    const data = statusData.map(item => item.total);
 
-  const labels = statusData.map(item => item.status);
-  const data = statusData.map(item => item.total);
+    const murojaatTuriLabels = murojaatTuriData.map(item => item.murojaat_turi);
+    const murojaatTuriDataValues = murojaatTuriData.map(item => item.total);
+
+    const acceptedLastWeekLabels = acceptedLastWeekData.length ? acceptedLastWeekData.map(item => item.murojaat_turi) : ['No Data'];
+    const acceptedLastWeekDataValues = acceptedLastWeekData.length ? acceptedLastWeekData.map(item => item.total) : [0];
+
+    const hududLabels = hududData.map(item => item.hudud);
+    const hududDataValues = hududData.map(item => item.total);
+
+    new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: murojaatTuriLabels,
+            datasets: [{
+                label: '# Murojaat Turlari',
+                data: murojaatTuriDataValues,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            maintainAspectRatio: false
+        }
+    });
+
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false
+        }
+    });
+
+    new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: acceptedLastWeekLabels,
+            datasets: [{
+                label: '# Songgi 1 haftalik qabul',
+                data: acceptedLastWeekDataValues,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            maintainAspectRatio: false
+        }
+    });
+
+    new Chart(ctx4, {
+        type: 'line',
+        data: {
+            labels: hududLabels,
+            datasets: [{
+                label: 'Viloyatlar boyicha',
+                data: hududDataValues,
+                borderWidth: 1,
+                backgroundColor: 'lightgreen',
+                fill: true
+            }]
+        },
+        options: {
+            maintainAspectRatio: false
+        }
+    });
+});
 //['Murojaat', 'Taklif', 'Shikoyat', 'Talabnoma', 'Bosh_ish_orin', 'Rahbariyat_qabuli', 'Sayt_mamuriyatiga']
-
-// Debugging: check if labels and data are correctly mapped
-  console.log('Labels:', labels);
-  console.log('Data:', data);
-
-  new Chart(ctx1, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: '# of Votes',
-        data: data,
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      },
-      maintainAspectRatio: false
-    }
-  });
-   new Chart(ctx2, {
-    type: 'doughnut',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      maintainAspectRatio: false
-    }
-  });
-
-  new Chart(ctx3, {
-    type: 'line',
-    data: {
-      labels: ['Murojaat', 'Taklif', 'Shikoyat', 'Talabnoma', 'Bosh_ish_orin', 'Rahbariyat_qabuli', 'Sayt_mamuriyatiga'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3, 4],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      },
-      maintainAspectRatio: false
-    }
-  });
-
-   new Chart(ctx4, {
-    type: 'line',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: 'Dataset 4',
-        data: [6, 11, 3, 15, 12, 5],
-        borderWidth: 1,
-        backgroundColor: 'lightgreen',
-        fill: true
-      }]
-    },
-    options: {
-      maintainAspectRatio: false
-    }
-  });
-
 </script>
     <!-- Statistika End -->
 

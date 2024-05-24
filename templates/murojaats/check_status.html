@@ -1,0 +1,49 @@
+{% extends 'murojaat_base.html' %}
+
+{% load static %}
+
+{% block aloqa_active %} active {% endblock %}
+
+{% block content %}
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'img/cat-1.jpg' %}" alt="">
+                </div>
+                <div class="col-lg-7">
+                    <div class="text-left mb-4">
+                        <h2>Murojaat holatini tekshiring</h2>
+                    </div>
+                        <form method="GET" action="{% url 'check_status' %}">
+                        <label for="id">Enter Murojaat ID:</label>
+                        <input type="number" id="id" name="id" required>
+                        <button type="submit">Tekshirish</button>
+                        </form>
+                    <hr>
+                    <!-- Display the result if status is available -->
+                    {% if status %}
+                        <h2>Natija:</h2>
+                        {% if murojaat_id %}
+                            <p>Murojaat ID: {{ murojaat_id }}</p>
+                        {% endif %}
+                        <p>Holati: {{ status }}</p>
+                        <p>Javob: {{ answer }}</p>
+                    {% endif %}
+                    <!-- Display error message if present -->
+                {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+{% endblock %}
